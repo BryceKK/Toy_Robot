@@ -9,7 +9,7 @@ describe "Table" do
     @EAST = [1,0]
     @WEST = [-1,0]
 
-    @table = Table.new(5)
+    @table = Table.new(5,5)
 
     @robot = Robot.new(2,2,:north,@table)
 
@@ -100,5 +100,21 @@ describe "Table" do
     @westbot.turn_right
     expect(@westbot.direction).to eq(:north)
     @westbot.turn_left
+  end
+
+  it "Should move in a valid direction" do
+    @westbot.move
+    expect(@westbot.location).to eq([1,2])
+  end
+  it "Should not move in an invalid direction" do
+    @westbot.move
+    expect(@westbot.location).to eq([1,2])
+  end
+
+  it "Should create a robot with table" do
+    r_table = Table.new(5,5)
+    r_table.add_robot(2,2,:north,:R1)
+    #r_table.command(:R1).move
+    expect(r_table.command(:R1).location).to eq([2,2])
   end
 end

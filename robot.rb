@@ -7,6 +7,7 @@ class Robot
   EAST = [1,0]
   WEST = [-1,0]
   DIRECTIONS = [:north, :east, :south, :west]
+  OFFSETS = [NORTH, EAST, SOUTH, WEST]
 
   def initialize(x,y,direction,table)
     @location = [x,y]
@@ -23,7 +24,15 @@ class Robot
   end
 
   def move()
-    #move forward, passing direction.
-    @location = @table.check_movement(@location, @direction)
+    @location = @table.check_movement(@location, OFFSETS[DIRECTIONS.index(@direction)])
   end
 end
+
+#throw exceptions, be more guarded
+#allow for more robots
+#allow for multiple moving at once
+#table can not be uniform side length
+
+#I can move the move function to table. But then command to report
+#locations or turn is weird. But also I can't put it all in table
+#surely. Idk man. Shit's weird

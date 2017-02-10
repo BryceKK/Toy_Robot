@@ -1,8 +1,12 @@
 require './robot'
 
 class Table
-  def initialize(side)
-    @SIDE_LENGTH = side
+  attr_reader :robots
+  def initialize(width, height)
+    @WIDTH = width
+    @HEIGHT = height
+    @robots = []
+    @names = []
   end
 
   def check_movement(location,direction)
@@ -13,8 +17,21 @@ class Table
   end
 
   def is_valid(location)
-    return false unless (location[0] > 0) && (location[0] <= @SIDE_LENGTH)
-    return false unless (location[1] > 0) && (location[1] <= @SIDE_LENGTH)
+    return false unless (location[0] > 0) && (location[0] <= @WIDTH)
+    return false unless (location[1] > 0) && (location[1] <= @HEIGHT)
     return true
   end
+
+  def add_robot(x,y,direction,name)
+    @robots.push(Robot.new(x,y,direction,self))
+    @names.push(name)
+  end
+
+  def command(name)
+    puts name
+    puts @robots[@names.index(name)]
+    return @robots[@names.index(name)]
+  end
 end
+
+#list of robot objects
